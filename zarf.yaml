@@ -1,0 +1,15 @@
+kind: ZarfPackageConfig
+metadata:
+  name: tactical-leapfrog-emulator
+  version: "1.0.0"
+  description: "Air-gapped deployment of a simulated Leapfrog AI environment for the tactical edge."
+components:
+  - name: leapfrog-core
+    required: true
+    manifests:
+      - name: leapfrog-manifests
+        namespace: default
+        files:
+          - leapfrog-manifest.yaml
+    images:
+      - nginx:alpine

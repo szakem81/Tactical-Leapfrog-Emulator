@@ -1,0 +1,22 @@
+# Tactical Edge AI Emulator (Air-Gapped Deployment)
+
+## The Mission
+Deploying modern machine learning capabilities to forward operating bases is routinely bottlenecked by rigid DoD compliance and physical network isolation. This project is a mathematically verifiable, fully air-gapped deployment of a simulated AI interface, emulating the architecture of products like Leapfrog AI.
+
+## The Product Strategy
+Standard commercial software deployment cycles fail in disconnected environments. Drawing on experience managing stakeholder complexity for massive enterprise platforms and firsthand knowledge of Army tactical operations, this emulator solves for the two primary DevSecOps friction points:
+
+1.  **The Transport Gap:** Utilizing Zarf to bundle external container images, configurations, and Kubernetes manifests into a single, offline-deployable `.tar.zst` artifact. This allows the software to be physically walked across a security boundary.
+2.  **The Compliance Bottleneck (ATO):** Utilizing a declarative DevSecOps pipeline to ensure the deployment meets strict security postures and generates an SBOM before it ever crosses the air-gap, shrinking the Authority to Operate cycle.
+
+## Architecture
+* **Orchestration:** K3s (via K3d) for lightweight, edge-optimized Kubernetes.
+* **Packaging:** Zarf for offline artifact generation and local internal registry injection.
+* **Workload:** Highly efficient container running a simulated AI interface, managed via declarative Kubernetes ConfigMaps, Deployments, and Services.
+
+## Execution (Offline Simulation)
+To verify the air-gapped capabilities of this deployment, sever all physical and wireless internet connections before running the installation. 
+
+1. `zarf package deploy --confirm`
+2. `kubectl port-forward svc/leapfrog-service 8080:80`
+3. Navigate to `http://localhost:8080` to view the secure interface.
